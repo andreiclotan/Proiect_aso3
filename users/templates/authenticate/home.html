@@ -1,0 +1,48 @@
+{% extends 'authenticate/base.html' %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="text-center">
+    <main class="form-signin">
+      <h1 class="h3 mb-3 fw-normal text-center">Select a user to chat</h1>
+      <form method="POST" action="checkview">
+        {% csrf_token %}
+        <select
+          class="form-select mb-3"
+          aria-label="Default select example"
+          name="room_name"
+        >
+          {% for user in users %}
+          <option value="{{user.username}}">{{user.username}}</option>
+          {% endfor %}
+        </select>
+        <button
+          class="w-100 btn btn-lg btn-primary"
+          type="submit"
+          value="Submit"
+        >
+          Join room
+        </button>
+      </form>
+    </main>
+  </body>
+</html>
+
+{% endblock %}
